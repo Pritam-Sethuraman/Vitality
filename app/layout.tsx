@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import Navbar from "@/components/navbar";
+import { ModeToggle } from "@/components/mode-toggle";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,7 +26,13 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <div className="absolute top-0 w-full">
+            <Navbar />
+          </div>
           {children}
+          <div className="absolute bottom-5 right-5">
+            <ModeToggle />
+          </div>
         </ThemeProvider>
       </body>
     </html>
