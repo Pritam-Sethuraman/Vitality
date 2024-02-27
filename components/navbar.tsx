@@ -6,7 +6,7 @@ import User from "./user";
 
 function Navbar() {
   return (
-    <div className="hidden flex-col md:flex">
+    <div className="flex flex-col">
       <div className="border-b">
         <div className="flex h-16 items-center px-4">
           <nav className="flex items-center space-x-4 lg:space-x-6 mx-6">

@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="flex min-h-screen flex-col items-center justify-between p-12 md:p-24">
       <div className="relative isolate pt-24 ">
         <div
           className="absolute inset-x-0 top-28 -z-10 transform-gpu overflow-hidden blur-3xl"
