@@ -1,16 +1,13 @@
 "use client";
 
+import { useState } from "react";
 import { Button } from "./ui/button";
 
 function SensorData() {
-  function handleMotionEvent(event: DeviceMotionEvent) {
-    const x_accl = event.accelerationIncludingGravity?.x;
-    const y_accl = event.accelerationIncludingGravity?.y;
-    const z_accl = event.accelerationIncludingGravity?.z;
+  const [motionData, setMotionData] = useState<DeviceMotionEvent | null>(null);
 
-    console.log("Acceleration X: ", x_accl);
-    console.log("Acceleration Y: ", y_accl);
-    console.log("Acceleration Z: ", z_accl);
+  function handleMotionEvent(event: DeviceMotionEvent) {
+    setMotionData(event);
   }
 
   function startDeviceMotionListener() {
@@ -30,6 +27,15 @@ function SensorData() {
       <Button variant="outline" onClick={stopDeviceMotionListener}>
         Stop Listening
       </Button>
+
+      {motionData && (
+        <div>
+          <h2>Motion Data:</h2>
+          <p>Acceleration X: {motionData.accelerationIncludingGravity?.x}</p>
+          <p>Acceleration Y: {motionData.accelerationIncludingGravity?.y}</p>
+          <p>Acceleration Z: {motionData.accelerationIncludingGravity?.z}</p>
+        </div>
+      )}
     </div>
   );
 }
