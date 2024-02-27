@@ -23,16 +23,10 @@ function Navbar() {
               Dashboard
             </Link>
             <Link
-              href="#"
+              href="/sensors"
               className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
             >
-              Products
-            </Link>
-            <Link
-              href="#"
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-            >
-              Settings
+              Sensors
             </Link>
           </nav>
 
