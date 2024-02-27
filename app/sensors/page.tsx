@@ -1,5 +1,3 @@
-"use client";
-
 import SensorData from "@/components/sensor-data";
 
 function SensorPage() {

@@ -1,59 +1,35 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
-interface SensorDataState {
-  alpha: number | null;
-  beta: number | null;
-  gamma: number | null;
-}
+import { Button } from "./ui/button";
 
 function SensorData() {
-  const [sensorData, setSensorData] = useState<SensorDataState>({
-    alpha: null,
-    beta: null,
-    gamma: null,
-  });
+  function handleMotionEvent(event: DeviceMotionEvent) {
+    const x_accl = event.accelerationIncludingGravity?.x;
+    const y_accl = event.accelerationIncludingGravity?.y;
+    const z_accl = event.accelerationIncludingGravity?.z;
 
-  const [isClient, setIsClient] = useState(false);
+    console.log("Acceleration X: ", x_accl);
+    console.log("Acceleration Y: ", y_accl);
+    console.log("Acceleration Z: ", z_accl);
+  }
 
-  useEffect(() => {
-    setIsClient(true);
+  function startDeviceMotionListener() {
+    window.addEventListener("devicemotion", handleMotionEvent);
+  }
 
-    const handleDeviceMotion = (eventData: DeviceMotionEvent) => {
-      console.log("Device Motion Event:", eventData);
-
-      setSensorData({
-        alpha: eventData.rotationRate?.alpha || null,
-        beta: eventData.rotationRate?.beta || null,
-        gamma: eventData.rotationRate?.gamma || null,
-      });
-    };
-
-    if (typeof window !== "undefined" && window.DeviceMotionEvent) {
-      console.log("Supported");
-      window.addEventListener("devicemotion", handleDeviceMotion, false);
-
-      return () => {
-        console.log("Removing Event Listener");
-        window.removeEventListener("devicemotion", handleDeviceMotion);
-      };
-    } else {
-      console.log("Not Supported");
-    }
-  }, []);
+  function stopDeviceMotionListener() {
+    window.removeEventListener("devicemotion", handleMotionEvent);
+  }
 
   return (
     <div>
-      {isClient ? (
-        <div>
-          <div>Alpha: {sensorData.alpha}</div>
-          <div>Beta: {sensorData.beta}</div>
-          <div>Gamma: {sensorData.gamma}</div>
-        </div>
-      ) : (
-        <div>Not Client</div>
-      )}
+      <h1>Device Motion</h1>
+      <Button variant="outline" onClick={startDeviceMotionListener}>
+        Start Listening
+      </Button>
+      <Button variant="outline" onClick={stopDeviceMotionListener}>
+        Stop Listening
+      </Button>
     </div>
   );
 }
